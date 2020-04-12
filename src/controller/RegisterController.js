@@ -21,8 +21,8 @@ module.exports = {
                 location: location,
                 situation, situation,
             })
-            user.password = undefined;
+            user.password = undefined; // deixa de mostrar a senha
         }
-        return response.json(user);
+        return response.send({user});
     }
 };
