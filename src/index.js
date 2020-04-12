@@ -1,15 +1,16 @@
 const express = require ('express');
-const mongoose = require('mongoose');
+
+const bodyParser = require('body-parser');
 
 const routes = require('./routes');
 
-mongoose.connect('mongodb+srv://geolarica:7za8JCGE3obMpgbC@geolaricadatabase-mcmt4.mongodb.net/test?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology:true,
-});
 const app = express();
 
-app.use(express.json());
+//app.use(express.json());
+//
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false}));
+
 app.use(routes);
 
 

@@ -1,12 +1,14 @@
 const {Router} = require ('express');
-const UserController = require('./controller/UserController');
+const UpdateController = require('./controller/UpdateController');
+const RegisterController = require('./controller/RegisterController');
+const DeleteCotroller = require('./controller/DeleteController');
 const LoginController = require('./controller/LoginController');
 
 const routes = Router();
 
-routes.post('/users', UserController.store);
+routes.post('/register', RegisterController.store);
+routes.put('/update', UpdateController.update);
 routes.get('/login', LoginController.login);
-routes.put('/users', UserController.update);
-routes.delete('/users', UserController.delete);
+routes.delete('/delete', DeleteCotroller.delete);
 
 module.exports = routes;
