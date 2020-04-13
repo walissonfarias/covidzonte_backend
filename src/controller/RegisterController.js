@@ -3,7 +3,7 @@ const User = require('../models/User');
 module.exports = {
     async store(request, response) {
         const { name, email, password, latitude, longitude, situation } = request.body;
-
+        console.log(situation);
         let user = await User.findOne({ email });
 
         if (user) {
@@ -19,10 +19,11 @@ module.exports = {
                 password: password,
                 email: email,
                 location: location,
-                situation, situation,
+                situation: situation,
             })
             user.password = undefined; // deixa de mostrar a senha
         }
+        console.log({user});
         return response.send({user});
     }
 };

@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
         require: true,
         lowercase: true,
     },
+    situation: {
+        type: String,
+        require: true,
+    },
     location: {
         type: PointSchema,
         index: '2dsphere',

@@ -7,7 +7,7 @@ module.exports = {
         let user = await User.findOne({email: inputEmail});
 
         if (!user) {
-            return response.json({ message: 'Email não cadastrado.' });
+            return response.status(400).send({ error: 'Email not found' });
         } else {
             const { name, email, password, latitude, longitude, situation } = request.body;
 
@@ -21,7 +21,7 @@ module.exports = {
                     situation: situation,
                 }
             });
-            return response.json( {message: "Usuário foi atualizado com sucesso."});
+            return response.status(200).send({ message: 'User has been updated'});
         }
     },
 };

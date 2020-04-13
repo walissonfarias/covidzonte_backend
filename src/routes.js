@@ -15,9 +15,9 @@ const routes = Router();
 
 routes.post('/register', RegisterController.store);
 routes.get('/login', LoginController.login);
-
+/*
 routes.use(authMiddleware);
-
+*/
 
 routes.put('/update', UpdateController.update);
 routes.delete('/delete', DeleteCotroller.delete);
