@@ -32,12 +32,14 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-UserSchema.pre('save', async function(next) {
-    const hash = await bcrypt.hash(this.password, 10);
-    this.password = hash;
+// criptografar senha
+UserSchema.pre('save', async function (next) { // antes de salvar
+    let user = this;
+    if(!user.isModified('password')) return next();
 
-    next();
-})
+    user.password = await bcrypt.hash(user.password, 10);
+    return next();
+});
 
 const User = mongoose.model('User', UserSchema);
 

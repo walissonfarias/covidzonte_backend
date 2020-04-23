@@ -8,7 +8,7 @@ module.exports = {
 
         console.log(user);
         if (user) {
-            return response.status(400).send({ error: '_User already exists_' });
+            return response.status(400).send({ error: '_User  ready exists_' });
         } else {
             const location = {
                 type: 'Point',

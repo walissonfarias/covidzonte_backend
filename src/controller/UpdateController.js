@@ -17,13 +17,14 @@ module.exports = {
             if (!await bcrypt.compare(password, user.password)) {
                 return response.status(400).send({ error: 'Invalid password' });
             }
-
+            const newEncriptPassword = await bcrypt.hash(newPassword, 10);
             console.log(user);
+
             await user.updateOne({
                 $set: {
                     name,
                     email,
-                    password: newPassword,
+                    password: newEncriptPassword,
                     latitude: latitude,
                     longitude: longitude,
                     situation: situation,
