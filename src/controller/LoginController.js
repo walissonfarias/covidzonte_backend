@@ -5,16 +5,15 @@ const authConfig = require('../config/auth.json');
 
 module.exports = {
     async login(request, response) {
-        const { inputEmail, inputPassword } = request.body;
+        let { email, password } = request.body;
 
-        const user = await User.findOne({ email: inputEmail }).select('+password');
-
+        const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
             return response.status(400).send({ error: 'User not found.' })
         }
         
-        if (!await bcrypt.compare(inputPassword, user.password)) {
+        if (!await bcrypt.compare(password, user.password)) {
             return response.status(400).send({error: 'Invalid password'});
         }
 
@@ -27,4 +26,3 @@ module.exports = {
         response.send({user, token});
     }
 };
-

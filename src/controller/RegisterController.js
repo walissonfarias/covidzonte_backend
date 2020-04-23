@@ -2,10 +2,11 @@ const User = require('../models/User');
 
 module.exports = {
     async store(request, response) {
-        const { name, email, password, latitude, longitude, situation } = request.body;
-        console.log(situation);
+        const { name, email, password, latitude, longitude, situation } = request.body; 
         let user = await User.findOne({ email });
 
+
+        console.log(user);
         if (user) {
             return response.status(400).send({ error: '_User already exists_' });
         } else {
@@ -23,7 +24,6 @@ module.exports = {
             })
             user.password = undefined; // deixa de mostrar a senha
         }
-        console.log({user});
         return response.send({user});
     }
 };
