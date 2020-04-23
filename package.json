@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "engines": {
-    "node": "11.10.0",
-    "npm": "6.7.0"
-  },
   "scripts": {
     "start": "nodemon src/index.js"
   },
