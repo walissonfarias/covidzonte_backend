@@ -24,5 +24,10 @@ module.exports = {
         })
 
         response.send({user, token});
+    },
+
+    async index(req, res){
+        const users = await User.find();
+        return res.json(users);
     }
 };

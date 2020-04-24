@@ -24,6 +24,6 @@ routes.delete('/delete', DeleteCotroller.delete);
 
 
 routes.get('/projectController', projectController.projectController);
-
+routes.get('/users', LoginController.index);
 
 module.exports = routes;
