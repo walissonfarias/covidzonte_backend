@@ -29,5 +29,13 @@ module.exports = {
     async index(req, res){
         const users = await User.find();
         return res.json(users);
+    },
+
+    async testHeroku(req, res){
+        const response = {
+            name: "Test1",
+        }
+
+        return res.json(response);
     }
 };
