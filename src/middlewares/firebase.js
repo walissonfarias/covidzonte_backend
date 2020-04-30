@@ -3,7 +3,7 @@ var serviceAccount = require('../config/covidzone-1f4d6-firebase-adminsdk-rbgc6-
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://covid-zone-ab949.firebaseio.com"
+  databaseURL: "https://covidzone-1f4d6.firebaseio.com"
 });
 
 module.exports = admin;
