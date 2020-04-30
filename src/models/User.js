@@ -1,17 +1,22 @@
 const mongoose = require('../database');
 const PointSchema = require('./utils/PointSchema');
-const bcrypt = require('bcryptjs');
+const admin = require ('../middlewares/firebase');
+//const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
+    uid: {
+        type: String,
+        unique: true,
+    },
     name: {
         type: String,
         require: true,
     },
-    password: {
+    /*password: {
         type: String,
         require: true,
         select: false,
-    },
+    },*/
     email: {
         type: String,
         unique: true,
@@ -31,14 +36,16 @@ const UserSchema = new mongoose.Schema({
         default: Date.now,
     }
 });
+/*
+// criptografar senha
+UserSchema.pre('save', async function (next) { // antes de salvar
+    let user = this;
+    if(!user.isModified('password')) return next();
 
-UserSchema.pre('save', async function(next) {
-    const hash = await bcrypt.hash(this.password, 10);
-    this.password = hash;
-
-    next();
-})
-
+    user.password = await bcrypt.hash(user.password, 10);
+    return next();
+});
+*/
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
