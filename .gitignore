@@ -2,3 +2,4 @@ node_modules
 .eslintrc
 .env
 .rest
+src/config/covidzone-68c34-firebase-adminsdk-qte25-5bc5e58821.json

@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 const Validator = require('validatorjs');
 const firebase = require('firebase');
-const jwt = require('jsonwebtoken');
+const admin = require('firebase-admin');
 const User = require('../models/User');
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
       });
     }
     const { email, password } = req.body;
-    firebase.auth().signInWithEmailAndPassword(email, password).then(async () => {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(async (account) => {
       const user = await User.findOne({ email }).exec();
       if (!user) {
         return res.status(401).json({
@@ -28,17 +28,11 @@ module.exports = {
           message: 'Unauthorized',
         });
       }
-      const token = jwt.sign({ user }, process.env.JWT_SECRETKEY, {
-        expiresIn: process.env.JWT_EXPIRESIN,
-      });
-      const refreshToken = jwt.sign({ user }, process.env.JWT_SECRETKEY, {
-        expiresIn: process.env.JWT_REFRESHTOKEN_EXPIRESIN,
-      });
-      return res.status(200).json({
+      const { uid } = account.user;
+      admin.auth().createCustomToken(uid).then((() => res.status(200).json({
         code: 200,
-        token,
-        refreshToken,
-      });
+        message: 'Login successfull',
+      })));
     }).catch(() => res.status(401).json({
       code: 401,
       message: 'Unauthorized',

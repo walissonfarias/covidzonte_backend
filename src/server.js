@@ -5,9 +5,11 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const helmet = require('helmet');
 const firebase = require('firebase');
+const admin = require('firebase-admin');
 require('firebase/auth');
 
 const routes = require('./routes');
+const serviceAccount = require('./config/covidzone-68c34-firebase-adminsdk-qte25-5bc5e58821.json');
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -18,6 +20,9 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 const app = express();
 const port = process.env.PORT;
