@@ -9,19 +9,11 @@ const admin = require('firebase-admin');
 require('firebase/auth');
 
 const routes = require('./routes');
-const serviceAccount = require('./config/covidzone-68c34-firebase-adminsdk-qte25-5bc5e58821.json');
+const Config = require('./config/firebase-config');
 
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASEURL,
-  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-};
-
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(Config.firebaseConfig);
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(Config.adminConfig),
 });
 
 const app = express();
