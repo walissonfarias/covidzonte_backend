@@ -1,29 +1,18 @@
-const {Router} = require ('express');
-const UpdateController = require('./controller/UpdateController');
-const RegisterController = require('./controller/RegisterController');
-const DeleteCotroller = require('./controller/DeleteController');
-const LoginController = require('./controller/LoginController');
-const CoordinatesController = require('./controller/CoordinatesController')
+const { Router } = require('express');
 
-const projectController = require('./controller/projectController');
+const CoordinatesController = require('./controller/CoordinatesController');
+const UserController = require('./controller/UserController');
+const AuthController = require('./controller/AuthController');
 
-const authMiddleware = require('./middlewares/auth');
-
+const isAuth = require('./middlewares/isAuth');
 
 const routes = Router();
 
+routes.get('/', isAuth, CoordinatesController.index);
 
-routes.post('/register', RegisterController.store);
-routes.post('/login', LoginController.login);
-/*
-routes.use(authMiddleware);
-*/
-routes.put('/',CoordinatesController.updateCoordinates);  //essa rota atualiza somente as coordenadas do usuário
-routes.put('/update', UpdateController.update);
-routes.delete('/delete', DeleteCotroller.delete);
+routes.post('/register', UserController.store);
 
+routes.post('/login', AuthController.login);
+routes.post('/logout', isAuth, AuthController.logout);
 
-routes.get('/projectController', projectController.projectController);
-routes.get('/users', LoginController.index);
-routes.get('/', LoginController.testHeroku);
 module.exports = routes;
