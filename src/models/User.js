@@ -31,18 +31,6 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-<<<<<<< HEAD
-// criptografar senha
-UserSchema.pre('save', async function (next) { // antes de salvar
-    let user = this;
-    if(!user.isModified('password')) return next();
-
-    user.password = await bcrypt.hash(user.password, 10);
-    return next();
-});
-
-=======
->>>>>>> staging
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
