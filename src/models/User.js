@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
   },
   situation: {
     type: String,
+    enum: ['saudavel', 'suspeito', 'confirmado'],
     require: [true, 'Situation is required'],
   },
   location: {
