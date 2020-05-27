@@ -1,18 +1,14 @@
 const { Router } = require('express');
 
-const CoordinatesController = require('./controller/CoordinatesController');
 const UserController = require('./controller/UserController');
-const AuthController = require('./controller/AuthController');
 
 const isAuth = require('./middlewares/isAuth');
 
 const routes = Router();
 
-routes.get('/', isAuth, CoordinatesController.index);
-
+routes.get('/user/:id', isAuth, UserController.index);
 routes.post('/register', UserController.store);
-
-routes.post('/login', AuthController.login);
-routes.post('/logout', isAuth, AuthController.logout);
+routes.put('/user/:id', isAuth, UserController.update);
+routes.delete('/user/:id', isAuth, UserController.destroy);
 
 module.exports = routes;
